@@ -2,9 +2,9 @@ import React from 'react';
 import { CONTACT_INFO, NAV_ITEMS } from '../../data/schoolData';
 import { MapPin, Phone, Mail, ArrowUpRight } from 'lucide-react';
 
-export const Footer: React.FC = () => {
-  const currentYear = new Date().getFullYear();
+const CURRENT_YEAR = new Date().getFullYear();
 
+export const Footer: React.FC = () => {
   return (
     <footer className="bg-black text-white border-t border-neutral-900 pt-20 pb-12 select-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -110,7 +110,7 @@ export const Footer: React.FC = () => {
         {/* Bottom Legal & Copyright Bar */}
         <div className="pt-8 border-t border-neutral-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-neutral-500">
           <div>
-            © {currentYear} Tulas International School. All rights reserved. Managed by Rishabh Educational Trust.
+            © {CURRENT_YEAR} Tulas International School. All rights reserved. Managed by Rishabh Educational Trust.
           </div>
           <div className="flex items-center gap-6">
             <a href="#" className="hover:text-neutral-300 transition-colors">Privacy Policy</a>

@@ -4,7 +4,10 @@ import { motion, useMotionValue, useSpring } from 'framer-motion';
 export const CustomCursor: React.FC = () => {
   const [cursorState, setCursorState] = useState<'default' | 'hover-button' | 'hover-link' | 'hover-card'>('default');
   const [isVisible, setIsVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(true);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    return !window.matchMedia('(pointer: fine)').matches;
+  });
 
   // Mouse position motion values
   const mouseX = useMotionValue(-100);
@@ -16,9 +19,7 @@ export const CustomCursor: React.FC = () => {
   const smoothY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    // Check if device supports fine pointer (mouse/trackpad)
     const mediaQuery = window.matchMedia('(pointer: fine)');
-    setIsMobile(!mediaQuery.matches);
 
     const handleMediaChange = (e: MediaQueryListEvent) => {
       setIsMobile(!e.matches);
@@ -26,14 +27,14 @@ export const CustomCursor: React.FC = () => {
 
     mediaQuery.addEventListener('change', handleMediaChange);
 
-    if (!mediaQuery.matches) {
+    if (mediaQuery.matches) {
       document.body.classList.add('has-custom-cursor');
     }
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
-      if (!isVisible) setIsVisible(true);
+      setIsVisible(true);
     };
 
     const handleMouseLeave = () => setIsVisible(false);
@@ -71,7 +72,7 @@ export const CustomCursor: React.FC = () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, [mouseX, mouseY, isVisible]);
+  }, [mouseX, mouseY]);
 
   if (isMobile || !isVisible) return null;
 
