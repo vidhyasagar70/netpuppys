@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: #050505;
+    color: #f5f5f5;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Desktop Custom Cursor Hide Default Cursor when custom cursor active */
+  @media (pointer: fine) {
+    .has-custom-cursor,
+    .has-custom-cursor * {
+      cursor: none !important;
+    }
+  }
+
+  /* Sleek Minimalist Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555555;
+  }
+}
+
+/* Utilities & Animations */
+.editorial-text-stroke {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.25);
+  color: transparent;
+}
+
+.editorial-text-stroke-light {
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.25);
+  color: transparent;
+}
+
+.bg-noise {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.glass-panel-dark {
+  background: rgba(15, 15, 15, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
